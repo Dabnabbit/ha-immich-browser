@@ -1,0 +1,13 @@
+{
+  "domain": "immich_browser",
+  "name": "Immich Browser",
+  "codeowners": ["@Dabentz"],
+  "config_flow": true,
+  "dependencies": ["frontend"],
+  "documentation": "https://github.com/Dabentz/ha-immich-browser",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Dabentz/ha-immich-browser/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
