@@ -1,4 +1,4 @@
-"""DataUpdateCoordinator for Immich Browser."""
+"""Secondary DataUpdateCoordinator for the Immich Browser integration."""
 
 from __future__ import annotations
 
@@ -13,23 +13,23 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import ApiClient, CannotConnectError
-from .const import DEFAULT_SCAN_INTERVAL, DOMAIN
+from .const import DEFAULT_SECONDARY_SCAN_INTERVAL, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
 
-class TemplateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
-    """Coordinator to manage data fetching from the service."""
+class TemplateSecondaryCoordinator(DataUpdateCoordinator[dict[str, Any]]):
+    """Secondary coordinator for slower-changing data."""
 
     config_entry: ConfigEntry
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry) -> None:
-        """Initialize the coordinator."""
+        """Initialize the secondary coordinator."""
         super().__init__(
             hass,
             _LOGGER,
-            name=DOMAIN,
-            update_interval=timedelta(seconds=DEFAULT_SCAN_INTERVAL),
+            name=f"{DOMAIN}_secondary",
+            update_interval=timedelta(seconds=DEFAULT_SECONDARY_SCAN_INTERVAL),
         )
         self.config_entry = entry
         session = async_get_clientsession(hass)
@@ -45,4 +45,4 @@ class TemplateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         try:
             return await self.client.async_get_data()
         except CannotConnectError as err:
-            raise UpdateFailed(f"Error communicating with API: {err}") from err
+            raise UpdateFailed(f"Secondary coordinator error: {err}") from err

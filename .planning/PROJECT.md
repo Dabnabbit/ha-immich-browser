@@ -55,7 +55,8 @@ Household members can browse their family photo library directly from the HA das
 - **Key endpoints**: /api/server/ping, /api/server/statistics, /api/albums, /api/albums/{id}, /api/assets/{id}/thumbnail, /api/search/metadata
 - **Photo source**: /share/CACHEDEV2_DATA/Pix mounted as /media/pix (read-only external library)
 - **ML processing**: Face detection and CLIP embeddings running (CPU-intensive on QNAP Celeron)
-- **HACS template**: Scaffolded from ha-hacs-template with config flow, coordinator, sensors, LitElement card
+- **HACS template**: Re-scaffolded from ha-hacs-template v1.0 via `copier copy` (2026-02-20). Template provides correct HA 2025.7+ patterns, CI, tests, WebSocket framework, and dual coordinator setup. All files need Immich-specific customization.
+- **Copier answers**: `.copier-answers.yml` tracks template version (v1.0) and variables; `copier update` pulls future template improvements
 - **Target users**: Household members browsing family photos from HA dashboards (phones, tablets, wall panels)
 - **Immich mobile app**: Exists for deep photo interaction — this card is for at-a-glance browsing and quick access
 
@@ -80,4 +81,4 @@ Household members can browse their family photo library directly from the HA das
 | Lightbox for preview (not full viewer) | Quick preview in card, "open in Immich" for full interaction | — Pending |
 
 ---
-*Last updated: 2026-02-19 after initialization*
+*Last updated: 2026-02-20 after template overlay from ha-hacs-template v1.0*

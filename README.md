@@ -1,67 +1,41 @@
 # Immich Browser
 
-A Home Assistant HACS integration for browsing your [Immich](https://immich.app/) photo library directly from a Lovelace dashboard. View albums, browse photos, and see library statistics without leaving Home Assistant.
+Browse your Immich photo library from Home Assistant dashboards.
 
-## Features
+[![HACS Default](https://img.shields.io/badge/HACS-Default-blue.svg)](https://github.com/hacs/integration)
+[![HA Version](https://img.shields.io/badge/Home%20Assistant-2025.7%2B-blue.svg)](https://www.home-assistant.io/)
 
-- Browse Immich albums with thumbnails
-- View recent photos
-- Photo grid with lightbox preview
-- Library statistics sensors (photos, videos, storage, albums)
-- Configurable grid columns
-- Config flow with Immich server validation
-- Visual card editor
+## Installation via HACS
 
-## Installation
+1. Open HACS in Home Assistant
+2. Go to Integrations
+3. Search for "Immich Browser"
+4. Install and restart Home Assistant
 
-### HACS (Recommended)
+## Manual Installation
 
-1. Add this repository as a custom repository in HACS
-2. Search for "Immich Browser" and install
-3. Restart Home Assistant
-4. Add the integration via Settings > Devices & Services
-
-### Manual
-
-1. Copy `custom_components/immich_browser/` to your HA `config/custom_components/`
+1. Copy `custom_components/immich_browser/` into your HA `config/custom_components/`
 2. Restart Home Assistant
-3. Add the integration via Settings > Devices & Services
+3. Add the integration via Settings > Devices & Services > Add Integration
+
+## Card Usage
+
+Add the Lovelace card to your dashboard:
+
+```yaml
+type: custom:immich-browser-card
+entity: sensor.example
+header: "Immich Browser"
+```
 
 ## Configuration
 
-### Integration Setup
+Configure the integration via Settings > Devices & Services > Add Integration > Immich Browser.
 
-The config flow asks for:
+## Links
 
-- **Immich URL**: Your Immich server URL (e.g. `http://192.168.1.100:2283`)
-- **API Key**: Generate one in Immich under User Settings > API Keys
-
-### Card Configuration
-
-Add the card to a dashboard and configure:
-
-- **Header**: Card title (default: "Photo Browser")
-- **Immich URL**: Same as integration config
-- **API Key**: Same as integration config (needed for direct thumbnail access)
-- **Columns**: Grid columns (default: 4)
-
-## Sensors
-
-| Sensor | Description |
-|--------|-------------|
-| `sensor.immich_browser_*_photos` | Total photo count |
-| `sensor.immich_browser_*_videos` | Total video count |
-| `sensor.immich_browser_*_storage_used` | Storage usage in GB |
-| `sensor.immich_browser_*_albums` | Number of albums |
-
-## Card Features
-
-- **Album View**: Browse albums with thumbnail previews and item counts
-- **Recent View**: See your most recent photos
-- **Photo Grid**: Responsive grid with configurable columns
-- **Lightbox**: Click any photo to view it larger
-- **Video Badges**: Video assets show a play icon overlay
-- **Stats Bar**: Photo/video/storage counts at the bottom
+- [Documentation](https://github.com/Dabentz/ha-immich-browser)
+- [Issues](https://github.com/Dabentz/ha-immich-browser/issues)
 
 ## License
 

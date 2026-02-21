@@ -3,7 +3,7 @@
   "name": "Immich Browser",
   "codeowners": ["@Dabentz"],
   "config_flow": true,
-  "dependencies": ["frontend"],
+  "dependencies": ["frontend", "http", "websocket_api"],
   "documentation": "https://github.com/Dabentz/ha-immich-browser",
   "integration_type": "service",
   "iot_class": "local_polling",

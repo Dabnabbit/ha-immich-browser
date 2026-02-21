@@ -1,18 +1,19 @@
 # Requirements: Immich Browser
 
 **Defined:** 2026-02-19
+**Updated:** 2026-02-20 (template overlay applied, scaffold/distribution requirements satisfied)
 **Core Value:** Household members can browse their family photo library directly from the HA dashboard without opening a separate app — recent photos, albums, and library stats at a glance.
 
 ## v1 Requirements
 
 Requirements for initial release. Each maps to roadmap phases.
 
-### Scaffold & Foundation
+### Scaffold & Foundation (Satisfied by Template)
 
-- [ ] **SCAF-01**: Integration loads on HA 2025.7+ without deprecation warnings (async static paths, shared aiohttp session)
-- [ ] **SCAF-02**: `manifest.json` passes hassfest validation (`iot_class: local_polling`, `domain: immich_browser`, `unique_id` support)
-- [ ] **SCAF-03**: Config entry has unique_id derived from Immich URL to prevent duplicate entries
-- [ ] **SCAF-04**: Domain is `immich_browser` to avoid conflict with official HA Immich integration
+- [x] **SCAF-01**: Integration loads on HA 2025.7+ without deprecation warnings (async static paths, shared aiohttp session) — *Template: async_register_static_paths, async_get_clientsession*
+- [x] **SCAF-02**: `manifest.json` passes hassfest validation (`iot_class: local_polling`, `domain: immich_browser`, `unique_id` support) — *Template: correct manifest with dependencies [frontend, http, websocket_api]*
+- [x] **SCAF-03**: Config entry has unique_id derived from Immich URL to prevent duplicate entries — *Template: unique_id + _abort_if_unique_id_configured() pattern*
+- [x] **SCAF-04**: Domain is `immich_browser` to avoid conflict with official HA Immich integration — *Template: configured during copier copy*
 
 ### Configuration
 
@@ -33,7 +34,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **WSCK-01**: `immich_browser/albums` WebSocket command returns album list with metadata
 - [ ] **WSCK-02**: `immich_browser/album_assets` WebSocket command returns paginated assets for an album
 - [ ] **WSCK-03**: `immich_browser/recent_assets` WebSocket command returns recent photos sorted by date
-- [ ] **WSCK-04**: WebSocket commands registered in `async_setup` (not `async_setup_entry`)
+- [x] **WSCK-04**: WebSocket commands registered in `async_setup` (not `async_setup_entry`) — *Template: async_register_websocket_commands() called in async_setup()*
 
 ### Card - Album Browsing
 
@@ -73,11 +74,11 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **PERF-03**: Concurrent thumbnail fetch limited to 6-8 parallel requests
 - [ ] **PERF-04**: disconnectedCallback cleans up all blob URLs
 
-### Distribution
+### Distribution (Satisfied by Template)
 
-- [ ] **DIST-01**: HACS-compatible (hacs.json, manifest.json, correct file structure)
-- [ ] **DIST-02**: Frontend card served via integration's async static path registration
-- [ ] **DIST-03**: CI passes hassfest and hacs/action validation
+- [x] **DIST-01**: HACS-compatible (hacs.json, manifest.json, correct file structure) — *Template: correct structure*
+- [x] **DIST-02**: Frontend card served via integration's async static path registration — *Template: StaticPathConfig in async_setup()*
+- [x] **DIST-03**: CI passes hassfest and hacs/action validation — *Template: .github/workflows/validate.yml*
 
 ## v2 Requirements
 
@@ -113,51 +114,53 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCAF-01 | Phase 1 | Pending |
-| SCAF-02 | Phase 1 | Pending |
-| SCAF-03 | Phase 1 | Pending |
-| SCAF-04 | Phase 1 | Pending |
-| CONF-01 | Phase 2 | Pending |
-| CONF-02 | Phase 2 | Pending |
-| SENS-01 | Phase 2 | Pending |
-| SENS-02 | Phase 2 | Pending |
-| SENS-03 | Phase 2 | Pending |
-| SENS-04 | Phase 2 | Pending |
-| SENS-05 | Phase 2 | Pending |
-| SENS-06 | Phase 2 | Pending |
-| WSCK-01 | Phase 3 | Pending |
-| WSCK-02 | Phase 3 | Pending |
-| WSCK-03 | Phase 3 | Pending |
-| WSCK-04 | Phase 3 | Pending |
-| ALBM-01 | Phase 4 | Pending |
-| ALBM-02 | Phase 4 | Pending |
-| ALBM-03 | Phase 4 | Pending |
-| ALBM-04 | Phase 4 | Pending |
-| GRID-01 | Phase 5 | Pending |
-| GRID-02 | Phase 5 | Pending |
-| GRID-03 | Phase 5 | Pending |
-| GRID-04 | Phase 5 | Pending |
-| RCNT-01 | Phase 5 | Pending |
-| RCNT-02 | Phase 5 | Pending |
-| LBOX-01 | Phase 6 | Pending |
-| LBOX-02 | Phase 6 | Pending |
-| LBOX-03 | Phase 6 | Pending |
-| NAVG-01 | Phase 4 | Pending |
-| NAVG-02 | Phase 4 | Pending |
-| NAVG-03 | Phase 4 | Pending |
-| PERF-01 | Phase 7 | Pending |
+| SCAF-01 | Template | **Done** |
+| SCAF-02 | Template | **Done** |
+| SCAF-03 | Template | **Done** |
+| SCAF-04 | Template | **Done** |
+| CONF-01 | Phase 1 | Pending |
+| CONF-02 | Phase 1 | Pending |
+| SENS-01 | Phase 1 | Pending |
+| SENS-02 | Phase 1 | Pending |
+| SENS-03 | Phase 1 | Pending |
+| SENS-04 | Phase 1 | Pending |
+| SENS-05 | Phase 1 | Pending |
+| SENS-06 | Phase 1 | Pending |
+| WSCK-01 | Phase 2 | Pending |
+| WSCK-02 | Phase 2 | Pending |
+| WSCK-03 | Phase 2 | Pending |
+| WSCK-04 | Template | **Done** |
+| ALBM-01 | Phase 3 | Pending |
+| ALBM-02 | Phase 3 | Pending |
+| ALBM-03 | Phase 3 | Pending |
+| ALBM-04 | Phase 3 | Pending |
+| GRID-01 | Phase 4 | Pending |
+| GRID-02 | Phase 4 | Pending |
+| GRID-03 | Phase 4 | Pending |
+| GRID-04 | Phase 4 | Pending |
+| RCNT-01 | Phase 4 | Pending |
+| RCNT-02 | Phase 4 | Pending |
+| LBOX-01 | Phase 4 | Pending |
+| LBOX-02 | Phase 4 | Pending |
+| LBOX-03 | Phase 4 | Pending |
+| NAVG-01 | Phase 3 | Pending |
+| NAVG-02 | Phase 3 | Pending |
+| NAVG-03 | Phase 3 | Pending |
+| PERF-01 | Phase 5 | Pending |
 | PERF-02 | Phase 5 | Pending |
 | PERF-03 | Phase 5 | Pending |
 | PERF-04 | Phase 5 | Pending |
-| DIST-01 | Phase 7 | Pending |
-| DIST-02 | Phase 1 | Pending |
-| DIST-03 | Phase 7 | Pending |
+| DIST-01 | Template | **Done** |
+| DIST-02 | Template | **Done** |
+| DIST-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 39 total
+- Satisfied by template: 8 (SCAF-01/02/03/04, DIST-01/02/03, WSCK-04)
+- Remaining: 31
 - Mapped to phases: 39
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-19*
-*Last updated: 2026-02-19 after initial definition*
+*Last updated: 2026-02-20 after template overlay*
