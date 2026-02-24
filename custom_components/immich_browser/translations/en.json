@@ -6,8 +6,9 @@
         "description": "Enter the connection details for your service.",
         "data": {
           "host": "Host",
-          "port": "Port"
-          ,"api_key": "API Key"
+          "port": "Port",
+          "use_ssl": "Use SSL",
+          "api_key": "API Key"
         }
       }
     },
@@ -27,9 +28,15 @@
         "data": {
           "host": "Host",
           "port": "Port",
+          "use_ssl": "Use SSL",
           "api_key": "API Key"
         }
       }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "unknown": "Unexpected error"
     }
   }
 }
