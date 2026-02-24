@@ -6,7 +6,7 @@ import logging
 from dataclasses import dataclass
 from pathlib import Path
 
-from homeassistant.components.http import StaticPathConfig
+from homeassistant.components.http import StaticPathConfig, async_register_static_paths
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
@@ -24,7 +24,7 @@ from .coordinator_secondary import TemplateSecondaryCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS: list[Platform] = [Platform.SENSOR]
+PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.BINARY_SENSOR]
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
@@ -59,14 +59,15 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Set up the Immich Browser integration."""
     frontend_path = Path(__file__).parent / "frontend"
     try:
-        await hass.http.async_register_static_paths(
+        await async_register_static_paths(
+            hass,
             [
                 StaticPathConfig(
                     FRONTEND_SCRIPT_URL,
                     str(frontend_path / f"{DOMAIN}-card.js"),
                     cache_headers=True,
                 )
-            ]
+            ],
         )
     except RuntimeError:
         # Path already registered — happens on reload
